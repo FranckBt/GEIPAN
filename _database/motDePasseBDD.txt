@@ -1,0 +1,2 @@
+'boirot	franck	test@gmail.com	test' -> visiteur inscrit
+'ADMIN 	Admin 	admin@gmail.com	admin'	->super admin
