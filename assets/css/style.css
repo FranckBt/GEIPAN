@@ -94,3 +94,7 @@ footer {
       display: block;
     }
 }
+#msg{
+    margin-bottom: 2rem;
+    text-decoration: underline;
+}
