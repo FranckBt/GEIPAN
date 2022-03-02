@@ -2,7 +2,6 @@
 <p id="msg">(Si vous n'ête pas <a href="http://localhost/geipan/index.php?page=inscription">inscrit</a> , vous ne pouvez déposer qu'un témoignage par adresse mail.)</p>
 
 <?php
-var_dump($_SESSION);
 
 if (isset($_POST['temoignage'])) {
     $email2 = trim(mb_strtolower($_POST['email2'])) ?? '';
@@ -12,7 +11,7 @@ if (isset($_POST['temoignage'])) {
     $card = htmlentities($_POST['cardPoint']) ?? '';
     $meteo = htmlentities($_POST['condMeteo']) ?? '';
     $description = htmlentities($_POST['desEvent']) ?? '';
-    $role=1;
+    $role = 1;
 
     $erreur = array();
 
@@ -42,8 +41,9 @@ if (isset($_POST['temoignage'])) {
             $resultat = $requete->fetchAll(PDO::FETCH_OBJ);
 
             if (count($resultat) !== 0 && $_SESSION['role']<1) {
-                echo "<p>Votre adresse est déjà enregistrée veuillez vous <a href='http://localhost/geipan/index.php?page=inscription'>inscrire</a></p>";
-            } else {
+                echo "<p>Votre adresse est déjà enregistrée veuillez vous <a href='http://localhost/geipan/index.php?page=inscription'>inscrire</a> / vous <a href='http://localhost/geipan/index.php?page=login'>connecter</a></p>";
+            
+            } if ($_SESSION = null) {
 
                 $query = $conn->prepare("
                 INSERT INTO users(userMail, id_role)
@@ -53,20 +53,27 @@ if (isset($_POST['temoignage'])) {
                 $query->bindParam('role', $role, PDO::PARAM_STR_CHAR);
 
                 echo "<p>Email enregistré pensez à vous <a href='http://localhost/geipan/index.php?page=inscription'>inscrire</a> la prochaine fois </p>";
-
+                $query->execute();
+            
                 $query2 = $conn->prepare("
                 INSERT INTO observations(obsDateTime, obsDuration, obsLocation, obsCardinalPoint, obsWeather, obsDescription)
                 VALUES ('$dateH','$dureeEvent','$departement','$card', '$meteo', '$description')
                 ");
                 $query2->execute();
-                $query->execute();
-            }
-        } catch (PDOException $e) {
+           } else{
+            $query2 = $conn->prepare("
+            INSERT INTO observations(obsDateTime, obsDuration, obsLocation, obsCardinalPoint, obsWeather, obsDescription)
+            VALUES ('$dateH','$dureeEvent','$departement','$card', '$meteo', '$description')
+            ");
+            $query2->execute();
+           }
+        }catch (PDOException $e) {
             die("Erreur :  " . $e->getMessage());
         }
 
         $conn = null;
     } else {
+       
         $messageErreur = "<ul>";
         $i = 0;
         do {
