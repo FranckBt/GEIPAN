@@ -2,6 +2,7 @@
     <nav role="navigation">
         <ul>
             <li><a href="index.php?page=home">Accueil</a></li>
+            <li><a href="index.php?page=deposerUnTemoignage">Déposer un témoignage</a></li>
             <?php
             if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
                 echo "<li><a href=\"index.php?page=logout\">Logout</a></li>";
