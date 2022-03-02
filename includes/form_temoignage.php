@@ -2,7 +2,7 @@
     <ul>
         <li><label for="email2">e-mail :</label><input type="text" id="email2" name="email2" /></li>
         <li><label for="dateEvent">Date et heure de l'événement</label><input type="datetime-local" id="DTevent" name="DTevent" /> </li>
-        <li><label for="dureeEvent">Durée de l'événement: </label><input type="time" id="DTevent" name="DTevent" /></li>
+        <li><label for="dureeEvent">Durée de l'événement: </label><input type="time" id="dureeEvent" name="dureeEvent" /></li>
         <li><label for="depEvent">Département de l'événement :</label></li><select name="dep" id="dep">
             <?php
                 $fichier = file('./_datas/departements.csv');
@@ -26,7 +26,7 @@
                 <option value="est">Est</option>
                 <option value="ouest">Ouest</option>
         </select>
-        <li><label for="conditionMeteo">Conditions météologiques (de 1 à 8 ) :</label><select name="condMeteo" id="condMeteo">
+        <li><label for="conditionMeteo">Conditions météorologiques (de 1 à 8 ) :</label><select name="condMeteo" id="condMeteo">
                 <option value="1">1 (Aucun nuage)</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -37,6 +37,6 @@
                 <option value="8">8 (aucune visu de ciel)</option>
             </select></li>
         <li><label for="descriptionEvent">Description de l'observation :</label><input type="text" id="desEvnet" name="desEvent" /></li>
-        <li><input type="reset" value="Effacer" /><input type="submit" value="Envoyer" name="envoi" /></li>
+        <li><input type="reset" value="Effacer" /><input type="submit" value="Envoyer" name="temoignage" /></li>
     </ul>
 </form>
