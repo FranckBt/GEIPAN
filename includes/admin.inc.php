@@ -30,7 +30,7 @@
                 $html .= " Mail :$mail / ";
                 $html .= " Role :$role / ";
                 $html .= "</li>";
-                $html .= "<li><input type='submit' value='effacer' name='$id' /></li>";
+                $html .= "<li>Effacer<input type='submit' value=$id name='effacer' /></li>";
                 $html .= "<hr>";
             }
             $html .= "</form>";
@@ -43,10 +43,30 @@
     }
     $conn= null;
 
-    var_dump($_POST);
+    
+        $serverName = "localhost";
+        $userName = "root";
+        $database = "geipan";
+        $userPassword = "";
+$del=$_POST[0];
+var_dump($del);
+        try {
+            $conn = new PDO("mysql:host=$serverName;dbname=$database", $userName, $userPassword);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+                $query = $conn->prepare("
+                DELETE FROM `users` WHERE `users`.`id_user`= $del
+                ");
+                $query->execute();
+                echo "<p>User suprimé</p>";
+                echo("<meta http-equiv='refresh' content='1'>");
+
+        } catch (PDOException $e) {
+            die("Erreur :  " . $e->getMessage());
+        }
     
 }else{   
     
     echo "<p>Vous ne disposez des droits nécessaires</p>";
-    
+
 }
